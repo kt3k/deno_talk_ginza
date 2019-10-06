@@ -1,0 +1,15 @@
+{
+  "name": "deno_talk_ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "remarker"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "remarker": "^1.10.0"
+  }
+}
