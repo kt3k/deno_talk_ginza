@@ -19,23 +19,24 @@ class: middle, center
 # 🙋‍♀️ 🙋‍♂️
 
 ---
+class: middle, center
 
+<img src="./assets/deno_logo_3.svg" width="300" />
+
+# Deno (での) の話
+
+---
+class: center
 自己紹介: 日野澤 (ひのさわ)
 
 # kt3k (twitter, github, ...)
 
 - 普段はフリーランスのフロントエンドエンジニア
-- 最近はロボットスタートアップ SEQSENSE (日比谷) に居ます
+- 最近はロボットスタートアップ SEQSENSE (日比谷) で働いています
 
 <img src="./assets/hino-izu.jpg" align="center" width="200" />
-
----
-class: middle, center
-
-# 今日は Deno (での) 
-# の話をします
-
-<img src="./assets/deno_logo_3.svg" align="center" width="300" />
+<img src="./assets/hino-izu.jpg" align="center" width="200" />
+<img src="./assets/hino-izu.jpg" align="center" width="200" />
 
 ---
 
@@ -45,12 +46,23 @@ class: middle, center
   - Node.js みたいなもの
   - 現在絶賛開発中
   - 作者は Node.js の作者 ライアン・ダール
-  - 作者独自の視点で Node に改良
+  - 作者独自の視点で Node を改良したもの
 
 ---
 class: middle, center
 
 # Node.js との違い
+
+---
+class: middle
+
+# Node.js との違い
+
+- require vs import
+- Security
+- TypeScript
+- 実装について
+- 標準ライブラリについて
 
 ---
 class: middle, center
@@ -60,62 +72,121 @@ class: middle, center
 ---
 # import
 
+```
+import {
+  parseDate
+} from 'https://deno.land/x/date-fns/index.js'
+
+console.log(parseDate('2019/10/8 10:00'))
+```
+
+---
+# import
+
 - Deno は import (ES Module) しか無い.
 - npm が使えないというデメリットはあるものの, ブラウザ互換の import なので, ブラウザ向けモジュールをそのまま使える 例: date-fns
-- commonjs (require) は無くて ES Module のみ
-- cjs <-> mjs 相互運用を考えなくてよい.
-- 会社としての npm への依存がない.
+- 良いところ:
+  - cjs <-> mjs 相互運用を考えなくてよい.
+  - 会社としての npm への依存がない.
+
+---
+# import
+
+- Node は import を現在実装中
+  - .mjs 拡張子, package.json の type: 'module' などのメタ情報で module vs script の区別をしようとしている.
+  - => なかなかリリースされない, ブラウザ非互換
+  - transpiler の import はまた別の仕様 => 非常に複雑
+- Node の import は**カオス状態**
+- Deno の import は**シンプルで気持ち良い!**
 
 ---
 class: middle, center
 
-# Security の強化
+# Security
 
 ---
 # Deno の Security
 
-- V8 = ブラウザのエンジン
-  - サンドボックス環境になっていて, V8 の中では OS のリソースが使えない
-  - プログラムが閉じ込められた状態
+- V8 = ブラウザの JS エンジン
+  - サンドボックス環境になっている
+  - => V8 の中のプログラムが容易に外部のプログラムやファイルにアクセスできないような仕組みになっている
 
 ---
 # Deno の Security
 
 - Node では素朴に OS の機能にアクセスする Native 拡張を V8 に入れた.
   - => サンドボックスではなくなった
-  - => セキュリティインシデントの顕在化 (event-stream 事件 eslint 事件, etc)
+  - => セキュリティインシデントの顕在化 (event-stream 事件 eslint-scope 事件, etc)
 
 ---
 # Deno の Security
-- Deno は V8 をサンドボックスとして使う.
-  - => OS のリソースにアクセスする際には全て許可制になっている
+- Deno は V8 のサンドボックス機能を活用
+  - => コンピュータのリソースにアクセスする際には全て許可制 ex. read, write, net, env, etc
   - => 意図しない不正操作をされにくくなった
 
 ---
-class: middle, center
-# TypeScript エコシステム
+# Deno の Security
+
+```
+deno --allow-read foo.ts
+```
+
+↑ Read しかできないプログラム実行例
+
+- foo.ts の依存ライブラリに攻撃コードが含まれていたとしても foo.ts は絶対にネットワークアクセスすることは出来ない. => eslint-scope 事件のようなインシデントがそもそも成立しない
 
 ---
-# TypeScript エコシステム
+class: middle, center
+# TypeScript
+
+---
+# Node の TypeScript
 
 - Node の世界では TypeScript はあくまで Opt in
   - @types モジュールはあったり無かったり
   - @types があってもバグっていたり
   - npm のバージョンがあがったけど @types が更新されないので使えなかったり
 
+TypeScript が opt-in であることによる弊害がいろいろある
+
 ---
-# TypeScript エコシステム
+# TypeScript opt-in の弊害
+
+- 同僚に全部 any にされる
+- any は嘘 => 嘘の伝播 => 炎上
+
+---
+class: middle, center
+最初から全部 TypeScript で出来ていればよかったのに・・・
+
+---
+# Deno の TypeScript
 
 - Deno は処理系に TypeScript が入っている.
   - 標準ライブラリも全て TypeScript で書かれている.
   - 根っこから全てに型が入った状態
   - エコシステムはまだまだ小さいが, 今後も全てに型がついた状態で成長する見込み.
 
-=> 本当の TypeScript 感がある!
+---
+# Deno の TypeScript
+
+- Deno は処理系に TypeScript が入っている.
+  - 標準ライブラリも全て TypeScript で書かれている.
+  - 根っこから全てに型が入った状態
+  - エコシステムはまだまだ小さいが, 今後も全てに型がついた状態で成長する見込み.
+
+=> 本当の TypeScript 感!
 
 ---
 class: middle, center
 # 実装の違い
+
+---
+# Node
+- C++, 生JavaScript
+
+# Deno
+- Rust, TypeScript
 
 ---
 # Node
@@ -136,35 +207,48 @@ class: middle, center
 - Node 自体は本当に最小限の機能しか実装しない
 - 他の全ての機能は npm に委譲する
   - left-pad みたいなマイクロライブラリが大量発生
-  - 良いところと悪いところがある
+  - => 良いところと悪いところがある
 
 ---
 # Node スモールコア
 
 - 良い点
-  - 標準機能が無いので, 誰でも標準をリプレースするようなライブラリが書ける
-  - 基本機能が 3rd party の手で進化
+  - 標準機能が無いので, 誰かが標準機能を作る
+  - 標準機能が進化していく
   - jslint -> jshint -> eslint 🎉
-- 悪い点
-  - 細かいライブラリ化が進みすぎた結果 `node_modules` 以下が巨大で重い/依存数が多いこと自体のリスク
+  - superagent -> axios -> ky
 
 ---
-# Deno は大きな標準ライブラリ志向
+class: middle
+# Node スモールコア
+- 悪い点
+  - 標準機能 / 小さな機能の乱立
+  - 依存関係が深くなる
+  - 依存の全体が巨大になりがち => 時間が経って特に巨大さが顕著になってきた
 
-- Go 言語の標準ライブラリはカバー範囲が相当広い
+<img src="./assets/node_modules.jpg" align="center" width="350"/>
+
+---
+# Python
+
+- Batteries Included という考え方
+- => 翻訳すると「電池入ってる」
+- 基本的なことはだいたい標準ライブラリで出来るようになっている
+
+---
+# Deno の標準ライブラリ
+
+- Deno は Node とは違い Batteries Included 志向
 - Deno の標準ライブラリは Go 言語の標準ライブラリのカバー範囲をカバーすることを目指している.
   - => マイクロモジュールの乱立を防ぐ効果が期待できる
+
+# No more 巨大依存!!
 
 ---
 # まとめ
 
-- 本当の import をしたい人
-  - => Deno を使いましょう
-- 本当の TypeScript を書きたい人
-  - => Deno を使いましょう
-- 本番サーバーを書きたい人
-  - => デ... まだ Node で我慢してください!
-
----
-class: middle, center
-# 1.0 がいつ出るか
+- Deno は import が綺麗
+- Deno は Security がすごい
+- Deno は TypeScript 入ってる
+- Deno は実装が良い
+- Deno は大きい標準ライブラリ志向
