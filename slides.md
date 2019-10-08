@@ -251,3 +251,10 @@ class: middle
 - Deno は TypeScript 入ってる
 - Deno は実装が良い
 - Deno は大きい標準ライブラリ志向
+
+---
+class: middle, center
+
+<img src="./assets/deno_logo_3.svg" align="center" width="300" />
+
+ご清聴ありがとうございました! 
