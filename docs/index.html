@@ -82,22 +82,26 @@ class: center
 
 # kt3k (twitter, github, ...)
 
-- 普段はフリーランスのフロントエンドエンジニア
-- 最近はロボットスタートアップ SEQSENSE (日比谷) で働いています
+フリーランスのフロントエンドエンジニア<br />
+今はロボットスタートアップ SEQSENSE 勤務<br />
+(TS, Go, ROS できる人募集中! オフィス: 日比谷)
 
-<img src="./assets/hino-izu.jpg" align="center" width="200" />
-<img src="./assets/hino-izu.jpg" align="center" width="200" />
-<img src="./assets/hino-izu.jpg" align="center" width="200" />
+<img src="./assets/hino-izu.jpg" align="center" height="200" />
+<img src="./assets/sq-2a.png" align="center" height="200" />
+<img src="./assets/sq-2b.png" align="center" height="200" />
 
 ---
 
-# Deno (での)
+# Deno (での) とは
 
 - 2018年6月に発表された JavaScriptと**TypeScript** の実行環境
-  - Node.js みたいなもの
-  - 現在絶賛開発中
+  - Node.js みたいなもの (サーバーサイド JS)
   - 作者は Node.js の作者 ライアン・ダール
   - 作者独自の視点で Node を改良したもの
+
+<p style="text-align: center">
+<img src="./assets/ryan.jpg" align="center" height="200" />
+</p>
 
 ---
 class: middle, center
@@ -120,25 +124,7 @@ class: middle, center
 
 # require と import が違う
 
----
-# import
 
-```
-import {
-  parseDate
-} from 'https://deno.land/x/date-fns/index.js'
-
-console.log(parseDate('2019/10/8 10:00'))
-```
-
----
-# import
-
-- Deno は import (ES Module) しか無い.
-- npm が使えないというデメリットはあるものの, ブラウザ互換の import なので, ブラウザ向けモジュールをそのまま使える 例: date-fns
-- 良いところ:
-  - cjs <-> mjs 相互運用を考えなくてよい.
-  - 会社としての npm への依存がない.
 
 ---
 # import
@@ -147,8 +133,30 @@ console.log(parseDate('2019/10/8 10:00'))
   - .mjs 拡張子, package.json の type: 'module' などのメタ情報で module vs script の区別をしようとしている.
   - => なかなかリリースされない, ブラウザ非互換
   - transpiler の import はまた別の仕様 => 非常に複雑
-- Node の import は**カオス状態**
-- Deno の import は**シンプルで気持ち良い!**
+- Node の import はかなり複雑
+
+---
+# import
+
+- Deno は import (ES Module) しか無い.
+- npm が使えないというデメリットはあるものの, ブラウザ互換の import なので, ブラウザ向けモジュールをそのまま使える 例: date-fns
+- 良いところ:
+  - cjs <-> mjs 相互運用を考えなくてよい.
+  - 会社としての npm inc. への依存がない.
+
+---
+# import
+
+- Deno はブラウザ互換の import を持っているので, date-fns の es module エンドポイントを直接使うことができる. (URL を直接 import できる)
+
+```js
+import {
+  parseDate
+} from 'https://deno.land/x/date-fns/index.js'
+
+console.log(toDate('2014-02-11T11:30:30'))
+//=> Tue Feb 11 2014 11:30:30
+```
 
 ---
 class: middle, center
@@ -158,6 +166,7 @@ class: middle, center
 ---
 # Deno の Security
 
+- Deno は Node.js と同様に V8 ベース
 - V8 = ブラウザの JS エンジン
   - サンドボックス環境になっている
   - => V8 の中のプログラムが容易に外部のプログラムやファイルにアクセスできないような仕組みになっている
@@ -204,7 +213,7 @@ TypeScript が opt-in であることによる弊害がいろいろある
 # TypeScript opt-in の弊害
 
 - 同僚に全部 any にされる
-- any は嘘 => 嘘の伝播 => 炎上
+- any は嘘 => 炎上
 
 ---
 class: middle, center
@@ -216,17 +225,7 @@ class: middle, center
 - Deno は処理系に TypeScript が入っている.
   - 標準ライブラリも全て TypeScript で書かれている.
   - 根っこから全てに型が入った状態
-  - エコシステムはまだまだ小さいが, 今後も全てに型がついた状態で成長する見込み.
-
----
-# Deno の TypeScript
-
-- Deno は処理系に TypeScript が入っている.
-  - 標準ライブラリも全て TypeScript で書かれている.
-  - 根っこから全てに型が入った状態
-  - エコシステムはまだまだ小さいが, 今後も全てに型がついた状態で成長する見込み.
-
-=> 本当の TypeScript 感!
+  - 現状のエコシステムはまだまだ小さいが, 今後も全て TypeScript で実装されていきそうな見込み.
 
 ---
 class: middle, center
@@ -293,7 +292,7 @@ class: middle
 - Deno の標準ライブラリは Go 言語の標準ライブラリのカバー範囲をカバーすることを目指している.
   - => マイクロモジュールの乱立を防ぐ効果が期待できる
 
-# No more 巨大依存!!
+=> No more 巨大依存!!
 
 ---
 # まとめ
