@@ -2031,6 +2031,11 @@ once@^1.3.0, once@^1.3.1, once@^1.3.2, once@^1.4.0:
   dependencies:
     wrappy "1"
 
+openurl@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/openurl/-/openurl-1.1.1.tgz#3875b4b0ef7a52c156f0db41d4609dbb0f94b387"
+  integrity sha1-OHW0sO96UsFW8NtB1GCduw+Us4c=
+
 ordered-read-streams@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ordered-read-streams/-/ordered-read-streams-1.0.1.tgz#77c0cb37c41525d64166d990ffad7ec6a0e1363e"
@@ -2257,10 +2262,10 @@ regex-not@^1.0.0, regex-not@^1.0.2:
     extend-shallow "^3.0.2"
     safe-regex "^1.1.0"
 
-remarker@^1.10.0:
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/remarker/-/remarker-1.10.0.tgz#8a34d74ebbe891fe00346246502f2367730f8f9b"
-  integrity sha512-8t4PK1tQ8Qcy0dqO4SIXNfvKe8+VHNGKce/oAOkwQGaqXj/5FbyaPItwAmBE25YYalr/x2etMS9ox7FyYULfwA==
+remarker@^1.11.2:
+  version "1.11.2"
+  resolved "https://registry.yarnpkg.com/remarker/-/remarker-1.11.2.tgz#4cba5c3612e5a4f3adff4513c022af79fac8730e"
+  integrity sha512-+UND5NLUOd4w1vq8K24maGuM+ODqxw7wjgdeYPo36sL80cfeTFA0pte8xkF6rrgc5OmuHmgqTrJnCVO1NUekKQ==
   dependencies:
     berber "^1.4.0"
     connect-livereload "^0.6.0"
@@ -2271,6 +2276,7 @@ remarker@^1.10.0:
     minimisted "^2.0.0"
     node-emoji "^1.8.1"
     nunjucks "^3.0.1"
+    openurl "^1.1.1"
     require-yaml "0.0.1"
     vinyl-transform "^1.0.0"
 

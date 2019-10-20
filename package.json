@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "remarker",
+    "start": "remarker -b",
     "build": "remarker build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "remarker": "^1.10.0"
+    "remarker": "^1.11.2"
   }
 }
